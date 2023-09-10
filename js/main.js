@@ -26,7 +26,7 @@ const kittenOne = `<li class="card">
     src= "${kittenImage1}"
     alt="gatito"
   />
-  <h3 class="card_title">${kittenName1}</h3>
+  <h3 class="card_title">${kittenName1.toUpperCase()}</h3>
   <h4 class="card_race">${kittenRace1}</h4>
   <p class="card_description">
   ${kittenDesc1}
@@ -40,7 +40,7 @@ class="card_img"
 src="${kittenImage2}"
 alt="sphynx-cat"
 />
-<h3 class="card_title">${kittenName2}</h3>
+<h3 class="card_title">${kittenName2.toUpperCase()}</h3>
 <h4 class="card_race">${kittenRace2}</h4>
 <p class="card_description">
 ${kittenDesc2}
@@ -53,7 +53,7 @@ const kittenThree = `<li class="card">
   src="${kittenImage3}"
   alt="maine-coon-cat"
   />
-  <h3 class="card_title">${kittenName3}</h3>
+  <h3 class="card_title">${kittenName3.toUpperCase()}</h3>
   <h4 class="card_race">${kittenRace3}</h4>
   <p class="card_description">
   ${kittenDesc3}
