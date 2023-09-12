@@ -213,3 +213,9 @@ li {
   margin: 5px;
   color: white;
 }
+
+.label {
+  color: red;
+  font-size: 1.5rem;
+  font-weight: 600;
+}

@@ -78,3 +78,42 @@ if( kittenDesc2.includes(descrSearchText) ) {
 if( kittenDesc3.includes(descrSearchText) ) {
   jsList.innerHTML = jsList.innerHTML + kittenThree;
   }
+
+
+  const jsbtnadd = document.querySelector(".js-btn-add");
+  const newForm = document.querySelector('.new-form');
+  
+  jsbtnadd.addEventListener('click', () => {
+    newForm.classList.toggle('collapsed');
+  });
+
+const inputDesc = document.querySelector('.js-input-desc');
+const inputPhoto = document.querySelector('.js-input-photo');
+const inputName = document.querySelector('.js-input-name');
+const inputRace = document.querySelector('.js-input-race');
+const labelMessageError = document.querySelector('.js-label-error');
+
+const jsNewformAdd = document.querySelector('.js-newform-add');
+
+jsNewformAdd.addEventListener('click', () =>{
+  const valueDesc = inputDesc.value;
+  const valuePhoto = inputPhoto.value;
+  const valueName = inputName.value;
+  const valueRace = inputRace.value;
+  
+  if (valueDesc === '' || valuePhoto === '' || valueName === '' || valueRace === '' ) {
+    labelMessageError.innerHTML = `¡Uy, parece que has olvidado algo!`;
+  } else {
+    
+  }
+});
+
+const jsNewformCancel = document.querySelector('.js-newform-cancel');
+jsNewformCancel.addEventListener('click', () =>{
+  newForm.classList.toggle('collapsed');
+  inputDesc.value = ``;
+  inputPhoto.value = ``;
+  inputName.value = ``;
+  inputRace.value = ``;
+  labelMessageError.innerHTML = ``;
+});
