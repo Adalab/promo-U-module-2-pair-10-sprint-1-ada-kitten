@@ -47,18 +47,48 @@ ${kittenDesc2}
   </p>
   </li>`;
 
-const kittenThree = `<li class="card">
+// const kittenThree = `<li class="card">
+//   <img
+//   class="card_img"
+//   src="${kittenImage3}"
+//   alt="maine-coon-cat"
+//   />
+//   <h3 class="card_title">${kittenName3.toUpperCase()}</h3>
+//   <h4 class="card_race">${kittenRace3}</h4>
+//   <p class="card_description">
+//   ${kittenDesc3}
+//   </p>
+//   </li>`;
+
+
+
+const kittenThree = renderKitten(kittenImage3, kittenDesc3, kittenName3, kittenRace3);
+
+function renderKitten(url, desc, name, race) {
+  return `<li class="card">
+<article>
   <img
-  class="card_img"
-  src="${kittenImage3}"
-  alt="maine-coon-cat"
+    class="card_img"
+    src= "${url}"
+    alt="gatito"
   />
-  <h3 class="card_title">${kittenName3.toUpperCase()}</h3>
-  <h4 class="card_race">${kittenRace3}</h4>
+  <h3 class="card_title">${name.toUpperCase()}</h3>
+  <h4 class="card_race">${race}</h4>
   <p class="card_description">
-  ${kittenDesc3}
-  </p>
-  </li>`;
+  ${desc}
+   </p>
+</article>
+</li>`;
+}
+
+// renderKitten(
+//   inputPhoto.value,
+//   inputDesc.value,
+//   inputName.value,
+//   inputRace.value
+// );
+
+
 
 // jsList.innerHTML = kittenOne + kittenTwo + kittenThree;
 
@@ -67,25 +97,42 @@ const descrSearchText = input_search_desc.value;
 
 let html = '';
 
-if( kittenDesc1.includes(descrSearchText) ) {
+if (kittenDesc1.includes(descrSearchText)) {
   jsList.innerHTML = kittenOne;
-  }
-  
-if( kittenDesc2.includes(descrSearchText) ) {
+}
+
+if (kittenDesc2.includes(descrSearchText)) {
   jsList.innerHTML = jsList.innerHTML + kittenTwo;
-  }
-  
-if( kittenDesc3.includes(descrSearchText) ) {
+}
+
+if (kittenDesc3.includes(descrSearchText)) {
   jsList.innerHTML = jsList.innerHTML + kittenThree;
+}
+
+const jsbtnadd = document.querySelector('.js-btn-add');
+const newForm = document.querySelector('.new-form');
+
+// jsbtnadd.addEventListener('click', () => {
+//   newForm.classList.toggle('collapsed');
+// });
+
+function showNewCatForm() {
+  newForm.classList.remove('collapsed');
+}
+function hideNewCatForm() {
+  newForm.classList.add('collapsed');
+}
+
+function handleClickNewCatForm(event) {
+  event.preventDefault();
+  if (newForm.classList.contains('collapsed')) {
+    showNewCatForm();
+  } else {
+    hideNewCatForm();
   }
+}
 
-
-  const jsbtnadd = document.querySelector(".js-btn-add");
-  const newForm = document.querySelector('.new-form');
-  
-  jsbtnadd.addEventListener('click', () => {
-    newForm.classList.toggle('collapsed');
-  });
+jsbtnadd.addEventListener('click', handleClickNewCatForm);
 
 const inputDesc = document.querySelector('.js-input-desc');
 const inputPhoto = document.querySelector('.js-input-photo');
@@ -95,21 +142,46 @@ const labelMessageError = document.querySelector('.js-label-error');
 
 const jsNewformAdd = document.querySelector('.js-newform-add');
 
-jsNewformAdd.addEventListener('click', () =>{
+// jsNewformAdd.addEventListener('click', () => {
+//   const valueDesc = inputDesc.value;
+//   const valuePhoto = inputPhoto.value;
+//   const valueName = inputName.value;
+//   const valueRace = inputRace.value;
+
+//   if (
+//     valueDesc === '' ||
+//     valuePhoto === '' ||
+//     valueName === '' ||
+//     valueRace === ''
+//   ) {
+//     labelMessageError.innerHTML = `¡Uy, parece que has olvidado algo!`;
+//   } else {
+//   }
+// });
+
+function addNewKitten(event) {
   const valueDesc = inputDesc.value;
   const valuePhoto = inputPhoto.value;
   const valueName = inputName.value;
   const valueRace = inputRace.value;
-  
-  if (valueDesc === '' || valuePhoto === '' || valueName === '' || valueRace === '' ) {
+
+  if (
+    valueDesc === '' ||
+    valuePhoto === '' ||
+    valueName === '' ||
+    valueRace === ''
+  ) {
     labelMessageError.innerHTML = `¡Uy, parece que has olvidado algo!`;
   } else {
-    
+    const html= renderKitten(nputDesc.valu, etc, etc);
+    listado.innerHTML //Como concepto
   }
-});
+}
+
+jsNewformAdd.addEventListener('click', addNewKitten);
 
 const jsNewformCancel = document.querySelector('.js-newform-cancel');
-jsNewformCancel.addEventListener('click', () =>{
+jsNewformCancel.addEventListener('click', () => {
   newForm.classList.toggle('collapsed');
   inputDesc.value = ``;
   inputPhoto.value = ``;
