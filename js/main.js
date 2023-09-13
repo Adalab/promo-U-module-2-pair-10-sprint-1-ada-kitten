@@ -1,5 +1,23 @@
 'use-strict';
+//querySelector
+
 const jsList = document.querySelector('.js-list');
+const input_search_desc = document.querySelector('.js_in_search_desc');
+
+const jsbtnadd = document.querySelector('.js-btn-add');
+const newForm = document.querySelector('.new-form');
+
+const inputDesc = document.querySelector('.js-input-desc');
+const inputPhoto = document.querySelector('.js-input-photo');
+const inputName = document.querySelector('.js-input-name');
+const inputRace = document.querySelector('.js-input-race');
+const labelMessageError = document.querySelector('.js-label-error');
+
+const jsNewformAdd = document.querySelector('.js-newform-add');
+const jsNewformCancel = document.querySelector('.js-newform-cancel');
+const jsBtnSearch = document.querySelector('.js_btn_search');
+
+//datos generales
 
 const kittenImage1 = 'https://dev.adalab.es/gato-siames.webp';
 const kittenName1 = 'Anastasio';
@@ -19,50 +37,30 @@ const kittenDesc3 =
   'Tienen la cabeza cuadrada y los ojos simétricos, por lo que su bella mirada se ha convertido en una de sus señas de identidad. Sus ojos son grandes y las orejas resultan largas y en punta.';
 const kittenRace3 = 'Maine Coon';
 
-const kittenOne = `<li class="card">
-<article>
-  <img
-    class="card_img"
-    src= "${kittenImage1}"
-    alt="gatito"
-  />
-  <h3 class="card_title">${kittenName1.toUpperCase()}</h3>
-  <h4 class="card_race">${kittenRace1}</h4>
-  <p class="card_description">
-  ${kittenDesc1}
-   </p>
-</article>
-</li>`;
+const kittenOne = renderKitten(
+  kittenImage1,
+  kittenDesc1,
+  kittenName1,
+  kittenRace1
+);
 
-const kittenTwo = `<li class="card">
-<img
-class="card_img"
-src="${kittenImage2}"
-alt="sphynx-cat"
-/>
-<h3 class="card_title">${kittenName2.toUpperCase()}</h3>
-<h4 class="card_race">${kittenRace2}</h4>
-<p class="card_description">
-${kittenDesc2}
-  </p>
-  </li>`;
+const kittenTwo = renderKitten(
+  kittenImage2,
+  kittenDesc2,
+  kittenName2,
+  kittenRace2
+);
 
-// const kittenThree = `<li class="card">
-//   <img
-//   class="card_img"
-//   src="${kittenImage3}"
-//   alt="maine-coon-cat"
-//   />
-//   <h3 class="card_title">${kittenName3.toUpperCase()}</h3>
-//   <h4 class="card_race">${kittenRace3}</h4>
-//   <p class="card_description">
-//   ${kittenDesc3}
-//   </p>
-//   </li>`;
+const kittenThree = renderKitten(
+  kittenImage3,
+  kittenDesc3,
+  kittenName3,
+  kittenRace3
+);
 
+const descrSearchText = input_search_desc.value;
 
-
-const kittenThree = renderKitten(kittenImage3, kittenDesc3, kittenName3, kittenRace3);
+//funciones
 
 function renderKitten(url, desc, name, race) {
   return `<li class="card">
@@ -81,40 +79,7 @@ function renderKitten(url, desc, name, race) {
 </li>`;
 }
 
-// renderKitten(
-//   inputPhoto.value,
-//   inputDesc.value,
-//   inputName.value,
-//   inputRace.value
-// );
-
-
-
-// jsList.innerHTML = kittenOne + kittenTwo + kittenThree;
-
-const input_search_desc = document.querySelector('.js_in_search_desc');
-const descrSearchText = input_search_desc.value;
-
-let html = '';
-
-if (kittenDesc1.includes(descrSearchText)) {
-  jsList.innerHTML = kittenOne;
-}
-
-if (kittenDesc2.includes(descrSearchText)) {
-  jsList.innerHTML = jsList.innerHTML + kittenTwo;
-}
-
-if (kittenDesc3.includes(descrSearchText)) {
-  jsList.innerHTML = jsList.innerHTML + kittenThree;
-}
-
-const jsbtnadd = document.querySelector('.js-btn-add');
-const newForm = document.querySelector('.new-form');
-
-// jsbtnadd.addEventListener('click', () => {
-//   newForm.classList.toggle('collapsed');
-// });
+//let html = '';
 
 function showNewCatForm() {
   newForm.classList.remove('collapsed');
@@ -132,34 +97,8 @@ function handleClickNewCatForm(event) {
   }
 }
 
-jsbtnadd.addEventListener('click', handleClickNewCatForm);
-
-const inputDesc = document.querySelector('.js-input-desc');
-const inputPhoto = document.querySelector('.js-input-photo');
-const inputName = document.querySelector('.js-input-name');
-const inputRace = document.querySelector('.js-input-race');
-const labelMessageError = document.querySelector('.js-label-error');
-
-const jsNewformAdd = document.querySelector('.js-newform-add');
-
-// jsNewformAdd.addEventListener('click', () => {
-//   const valueDesc = inputDesc.value;
-//   const valuePhoto = inputPhoto.value;
-//   const valueName = inputName.value;
-//   const valueRace = inputRace.value;
-
-//   if (
-//     valueDesc === '' ||
-//     valuePhoto === '' ||
-//     valueName === '' ||
-//     valueRace === ''
-//   ) {
-//     labelMessageError.innerHTML = `¡Uy, parece que has olvidado algo!`;
-//   } else {
-//   }
-// });
-
 function addNewKitten(event) {
+  event.preventDefault();
   const valueDesc = inputDesc.value;
   const valuePhoto = inputPhoto.value;
   const valueName = inputName.value;
@@ -173,14 +112,16 @@ function addNewKitten(event) {
   ) {
     labelMessageError.innerHTML = `¡Uy, parece que has olvidado algo!`;
   } else {
-    const html= renderKitten(nputDesc.valu, etc, etc);
-    listado.innerHTML //Como concepto
+    const cardKitten = renderKitten(
+      inputPhoto.value,
+      inputDesc.value,
+      inputName.value,
+      inputRace.value
+    );
+    jsList.innerHTML += cardKitten;
   }
 }
 
-jsNewformAdd.addEventListener('click', addNewKitten);
-
-const jsNewformCancel = document.querySelector('.js-newform-cancel');
 jsNewformCancel.addEventListener('click', () => {
   newForm.classList.toggle('collapsed');
   inputDesc.value = ``;
@@ -189,3 +130,26 @@ jsNewformCancel.addEventListener('click', () => {
   inputRace.value = ``;
   labelMessageError.innerHTML = ``;
 });
+
+const filterKitten = (event) => {
+  event.preventDefault();
+  if (kittenDesc1.includes(descrSearchText)) {
+    jsList.innerHTML += kittenOne;
+  }
+  if (kittenDesc2.includes(descrSearchText)) {
+    jsList.innerHTML += kittenTwo;
+  }
+  if (kittenDesc3.includes(descrSearchText)) {
+    jsList.innerHTML += kittenThree;
+  }
+};
+
+//manejadores
+
+jsbtnadd.addEventListener('click', handleClickNewCatForm);
+jsNewformAdd.addEventListener('click', addNewKitten);
+jsBtnSearch.addEventListener('click', filterKitten);
+
+// jsbtnadd.addEventListener('click', () => {
+//   newForm.classList.toggle('collapsed');
+// });
