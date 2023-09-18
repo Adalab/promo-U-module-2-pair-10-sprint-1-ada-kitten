@@ -51,20 +51,15 @@ function renderKitten(kittenData) {
     class="card_img"
     src= "${kittenData.image}"
     alt="gatito"
-  />
-  <h3 class="card_title">${kittenData.name}</h3>
-  <h4 class="card_race">${kittenData.race}</h4>
-  <p class="card_description">
-  ${kittenData.desc}
+    />
+    <h3 class="card_title">${kittenData.name}</h3>
+    <h4 class="card_race">${kittenData.race}</h4>
+    <p class="card_description">
+    ${kittenData.desc}
    </p>
 </article>
 </li>`;
 }
-
-jsList.innerHTML =
-  renderKitten(kittenDataList[0]) +
-  renderKitten(kittenDataList[1]) +
-  renderKitten(kittenDataList[2]);
 
 function showNewCatForm() {
   newForm.classList.remove('collapsed');
@@ -103,6 +98,14 @@ function addNewKitten(event) {
   }
 }
 
+function renderKittenList(kittenDataList) {
+  jsList.innerHTML = '';
+  for (i = 0; i < kittenDataList.length; i++) {
+    jsList.innerHTML += renderKitten(kittenDataList[i]);
+  }
+}
+renderKittenList(kittenDataList);
+
 jsNewformCancel.addEventListener('click', () => {
   newForm.classList.toggle('collapsed');
   inputDesc.value = ``;
@@ -112,25 +115,19 @@ jsNewformCancel.addEventListener('click', () => {
   labelMessageError.innerHTML = ``;
 });
 
-const filterKitten = (event) => {
+function filterKitten(event) {
   event.preventDefault();
-  if (kittenDataList[0].desc.includes(descrSearchText)) {
-    jsList.innerHTML += renderKitten(kittenDataList[0]);
+  const descrSearchText = input_search_desc.value;
+  jsList.innerHTML = '';
+  for (const kittenItem of kittenDataList) {
+    if (kittenItem.desc.includes(descrSearchText)) {
+      jsList.innerHTML += renderKitten(kittenItem);
+    }
   }
-  if (kittenDataList[1].desc.includes(descrSearchText)) {
-    jsList.innerHTML += renderKitten(kittenDataList[1]);
-  }
-  if (kittenDataList[2].desc.includes(descrSearchText)) {
-    jsList.innerHTML += renderKitten(kittenDataList[2]);
-  }
-};
+}
 
 //manejadores
 
 jsbtnadd.addEventListener('click', handleClickNewCatForm);
 jsNewformAdd.addEventListener('click', addNewKitten);
 jsBtnSearch.addEventListener('click', filterKitten);
-
-// jsbtnadd.addEventListener('click', () => {
-//   newForm.classList.toggle('collapsed');
-// });
